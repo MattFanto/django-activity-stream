@@ -33,6 +33,10 @@ class Follow(models.Model):
     )
     flag = models.CharField(max_length=255, blank=True, db_index=True, default='')
     started = models.DateTimeField(default=now, db_index=True)
+
+    active = models.BooleanField(default=True)
+    reason = models.CharField(max_length=255, blank=True, null=True, default=None)
+
     objects = FollowManager()
 
     class Meta:
