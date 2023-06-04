@@ -8,7 +8,7 @@ from actstream.signals import action
 from actstream.registry import check
 
 
-def follow(user, obj, send_action=True, actor_only=True, flag='', **kwargs):
+def follow(user, obj, send_action=True, actor_only=True, flag='', reason=None, active=True, **kwargs):
     """
     Creates a relationship allowing the object's activities to appear in the
     user's stream.
@@ -35,7 +35,9 @@ def follow(user, obj, send_action=True, actor_only=True, flag='', **kwargs):
     instance, created = apps.get_model('actstream', 'follow').objects.get_or_create(
         user=user, object_id=obj.pk, flag=flag,
         content_type=ContentType.objects.get_for_model(obj),
-        actor_only=actor_only
+        actor_only=actor_only,
+        reason=reason,
+        active=active,
     )
     if send_action and created:
         if not flag:
