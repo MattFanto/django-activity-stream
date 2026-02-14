@@ -37,6 +37,7 @@ def follow(user, obj, send_action=True, actor_only=True, flag='', reason=None, a
         content_type=ContentType.objects.get_for_model(obj),
         actor_only=actor_only,
         reason=reason,
+        # TODO not part of the original key
         active=active,
     )
     if send_action and created:
